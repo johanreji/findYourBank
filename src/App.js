@@ -1,24 +1,61 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from "react-router-dom";
+import SideNav from './Components/SideNav';
+import AllBanks from './Components/AllBanks';
+import BankDetail from './Components/BankDetail';
+import { useEffect, useState } from "react";
+const URL = "https://vast-shore-74260.herokuapp.com/banks?city="
 
 function App() {
+
+  const [banks, setBanks] = useState([]);
+  const [city, setCity] = useState("");
+  const [pageSize, setPageSize] = useState(10);
+  const [startIndex, setStartIndex] = useState(0);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      setIsError(false)
+      try {
+        let response = await fetch(URL + city.toUpperCase());
+        let data = await response.json();
+        if (data && Array.isArray(data)) {
+          setBanks(data);
+        } else {
+          setIsError(true)
+        }
+      } catch (error) {
+        setIsError(true)
+      };
+      setIsLoading(false)
+    }
+    fetchData();
+  }, [city]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="header">Find Your Bank</div>
+      <div className="main">
+        <SideNav />
+        <div className="content">
+          <Routes>
+            <Route path="/all-banks"
+              element={<AllBanks isError={isError} isLoading={isLoading} pageSize={pageSize}
+                setPageSize={setPageSize} startIndex={startIndex} setStartIndex={setStartIndex}
+                setCity={setCity} city={city} banks={banks} />} />
+
+            <Route path="/bank-details/:ifsc" element={<BankDetail banks={banks} />} />
+
+            <Route path="/" element={<AllBanks isError={isError} isLoading={isLoading} pageSize={pageSize}
+              setPageSize={setPageSize} startIndex={startIndex} setStartIndex={setStartIndex}
+              setCity={setCity} city={city} banks={banks} />} />
+          </Routes>
+        </div>
+      </div>
+    </>
   );
 }
 

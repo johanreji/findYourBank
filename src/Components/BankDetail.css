@@ -1,0 +1,15 @@
+.backBtn{
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+}
+.bankField{
+    display: flex;
+    gap: 20px;
+    font-size: 16px;
+    margin: 8px 8px;
+}
+.bankField > div:first-child{
+    font-weight: 600;
+    width: 150px;
+}

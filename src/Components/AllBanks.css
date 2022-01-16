@@ -1,0 +1,79 @@
+.headerSection{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.sectionHeader{
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+.sectionFilter > select, .sectionFilter > input, .footer > select{
+    border: 1px solid gray;
+    padding: 4px;
+    min-width: 150px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 0px 4px;
+}
+.cityFilter{
+    margin-right: 8px;
+}
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.footer > span {
+    font-size: 16px;
+}
+.footer > select{
+    min-width: 20px;
+    border: 1px solid gray;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 8px;
+}
+.footer > .navigation {
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    margin: 0 4px;
+}
+
+.dataHeader,.dataRow{
+    display: grid;
+    grid-template-columns:2fr 1fr 2fr 1fr 2fr;
+    font-size: 16px;
+    grid-column-gap: 20px;
+    padding: 8px;
+}
+.dataHeader{
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+.dataRow{
+    text-decoration: none;
+    color: black;
+}
+
+.dataRow:nth-child(even){
+    background-color: rgb(240, 240, 240); 
+}
+.dataRow:hover{
+  background-color: rgb(211, 211, 211);
+}
+.infoMsg,.errorMsg{
+    margin: 50px;
+    text-align: center;
+}
+.errorMsg{
+    color: rgb(209, 17, 17);
+}
+.infoMsg{
+    color: #33b86c;}

@@ -1,0 +1,27 @@
+.sidenav {
+    box-shadow: -3px 2px 6px 0 #556;
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    width: 140px;
+    background-color: #f5f5f5;
+    padding: 8px;
+  }
+  .sidenav ul{
+    list-style-type: none;
+    padding: 0;
+  }
+  .sidenav a {
+    padding: 4px;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+  }
+  
+  .link{
+    color: gray;
+  }
+
+  .active{
+      color: #33b86c;
+  }
