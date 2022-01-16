@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import SideNav from './Components/SideNav';
 import AllBanks from './Components/AllBanks';
 import BankDetail from './Components/BankDetail';
@@ -59,9 +59,8 @@ function App() {
               element={<AllBanks isFavourite={true} isError={isError} isLoading={isLoading} pageSize={pageSize}
                 setPageSize={setPageSize} startIndex={startIndex} setStartIndex={setStartIndex}
                 setCity={setCity} city={city} banks={banks.filter(bank => favourites.includes(bank.ifsc))} />} />
-            <Route path="/" element={<AllBanks isError={isError} isLoading={isLoading} pageSize={pageSize}
-              setPageSize={setPageSize} startIndex={startIndex} setStartIndex={setStartIndex}
-              setCity={setCity} city={city} banks={banks} />} />
+            <Route path="/" element={<Navigate to="all-banks" />} />
+
           </Routes>
         </div>
       </div>
