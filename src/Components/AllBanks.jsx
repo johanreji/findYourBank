@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import './AllBanks.css';
 
 const PAGE_SIZE_LIST = [10, 20, 30, 40, 50];
-const AllBanks = ({ banks, city, setCity, startIndex, setStartIndex, pageSize, setPageSize, isError, isLoading }) => {
+const AllBanks = ({ isFavourite, banks, city, setCity, startIndex, setStartIndex, pageSize, setPageSize, isError, isLoading }) => {
     const [query, setQuery] = useState("");
     const [searchText, setSearchText] = useState("");
     const [filteredData, setFilteredData] = useState([]);
+    useEffect(() => {
+        setStartIndex(0);
+    }, [isFavourite, city])
 
     useEffect(() => {
         if (query == "IFSC") {
@@ -25,7 +28,7 @@ const AllBanks = ({ banks, city, setCity, startIndex, setStartIndex, pageSize, s
     }, [searchText, query, banks])
     return <div>
         <div className="headerSection">
-            <div className="sectionHeader"> All banks</div>
+            <div className="sectionHeader"> {isFavourite ? 'Favourite' : 'All'} banks</div>
             <div className="sectionFilter">
                 <select className="cityFilter" value={city} onChange={(e) => setCity(e.target.value)}>
                     <option value="">Select city</option>

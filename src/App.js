@@ -9,6 +9,7 @@ const URL = "https://vast-shore-74260.herokuapp.com/banks?city="
 function App() {
 
   const [banks, setBanks] = useState([]);
+  const [favourites, setFavourites] = useState([]);
   const [city, setCity] = useState("");
   const [pageSize, setPageSize] = useState(10);
   const [startIndex, setStartIndex] = useState(0);
@@ -35,6 +36,12 @@ function App() {
     fetchData();
   }, [city]);
 
+  const toggleFav = (ifsc) => {
+    favourites.includes(ifsc) ?
+      setFavourites(favourites.filter(fav => fav != ifsc)) :
+      setFavourites([...favourites, ifsc]);
+  }
+
   return (
     <>
       <div className="header">Find Your Bank</div>
@@ -47,8 +54,11 @@ function App() {
                 setPageSize={setPageSize} startIndex={startIndex} setStartIndex={setStartIndex}
                 setCity={setCity} city={city} banks={banks} />} />
 
-            <Route path="/bank-details/:ifsc" element={<BankDetail banks={banks} />} />
-
+            <Route path="/bank-details/:ifsc" element={<BankDetail favourites={favourites} toggleFav={toggleFav} banks={banks} />} />
+            <Route path="/favourites"
+              element={<AllBanks isFavourite={true} isError={isError} isLoading={isLoading} pageSize={pageSize}
+                setPageSize={setPageSize} startIndex={startIndex} setStartIndex={setStartIndex}
+                setCity={setCity} city={city} banks={banks.filter(bank => favourites.includes(bank.ifsc))} />} />
             <Route path="/" element={<AllBanks isError={isError} isLoading={isLoading} pageSize={pageSize}
               setPageSize={setPageSize} startIndex={startIndex} setStartIndex={setStartIndex}
               setCity={setCity} city={city} banks={banks} />} />

@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import './BankDetail.css'
 import backArrow from '../backArrow.png';
 
-const BankDetails = ({ banks }) => {
+const BankDetails = ({ toggleFav, banks, favourites }) => {
     const { ifsc } = useParams();
     let selectedBank = banks.find(bank => bank.ifsc == ifsc);
 
@@ -42,6 +42,7 @@ const BankDetails = ({ banks }) => {
                     {selectedBank.state}
                 </div>
             </div>
+            <button className="favBtn" onClick={() => toggleFav(selectedBank.ifsc)}>{favourites.includes(selectedBank.ifsc) ? 'Removes from' : 'Add to'} favourites</button>
         </div>
     </div>
 }
